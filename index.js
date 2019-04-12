@@ -273,8 +273,19 @@ _.map = function(col, func){
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
-_.reject = function(arr, func){
-    //why does this exist
+_.reject = function (arr, fun) {
+    var okay = _.filter(arr, fun);
+    var out = [];
+    var j = 0;
+    for (var i in arr) {
+        if (arr[i] != okay[j]) {
+            out.push(arr[i]);
+        }
+        else {
+            j++;
+        }
+    }
+    return out;
 };
 
 /** _.partition
@@ -460,8 +471,22 @@ _.some = function(col, func){
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
-_.pluck = function(array, key){
-    _.map([{a: "one"}, {a: "two"}], function(e){return e[key]})
+_.pluck = function(arr, prop){
+    return _.map(arr, function(arr){return arr[prop]});
+};
+
+_.dedup = function dedup(array) {
+    var toReturn = [];
+    for(var i = 0; i < array.length; i++){
+        var joined = toReturn.join(" ");
+        if(joined.search(array[i]) == -1){
+            toReturn.push(array[i]);
+        }
+        else{
+            continue;
+        }
+    }
+    return toReturn;
 };
 
 //////////////////////////////////////////////////////////////////////
